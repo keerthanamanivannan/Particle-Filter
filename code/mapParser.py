@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import os.path
 import matplotlib.pyplot as plt
+import numpy as np
 
 def parser():
 	basePath = os.path.dirname(__file__)
@@ -27,13 +28,13 @@ def parser():
 			for x in range(0,mapsize_x):
 				for y in range(0,mapsize_y):
 					m[x].append(float(words[i+3+x*mapsize_y+y]))
-
+	m = np.array(m)
 	plt.imshow(m, extent=(0,800,0,800))
 	plt.show()
 	return m
 
-def main():
-	m = parser()
+#def main():
+#	m = parser()
 
-if __name__ == "__main__": 
-	main()
+#if __name__ == "__main__": 
+#	main()

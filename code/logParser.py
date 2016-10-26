@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 import os.path
+import numpy as np
+
 def parser():
 	OData = {}
 	LData = {}
@@ -18,6 +20,8 @@ def parser():
 		elif lines[i][0] == 'O':
 			l = lines[i].split()
 			OData[i] = tuple(float(l[x]) for x in range(1,len(l)))	
+	OData = np.array(OData.values())
+	LData = np.array(LData.values())
 	return OData, LData
 
 def main():

@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import random
 import math
+import numpy as np
 
 def motionModel(uCurrent, uPrev, xPrev, alpha):
 	odomRot1 = math.atan2(uCurrent[1] - uPrev[1], uCurrent[0]- uPrev[0]) - uPrev[2]
@@ -20,3 +21,10 @@ def motionModel(uCurrent, uPrev, xPrev, alpha):
 def sample(sigma):
 	return random.gauss(0, sigma)
 
+def motionModelMap(uCurrent, uPrev, xPrev, alpha, m):
+	while (1):
+		xCurrent = motionModel(uCurrent, uPrev, xPrev, alpha)
+		pi = #to be calculated
+		if pi<=0:
+			break;
+	return (xCurrent, pi)
