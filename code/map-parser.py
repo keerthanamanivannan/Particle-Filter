@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os.path
+import numpy as np
 import matplotlib.pyplot as plt
 
 def parser():
@@ -26,9 +27,13 @@ def parser():
 			m = [[] for t in range(mapsize_x)]  
 			for x in range(0,mapsize_x):
 				for y in range(0,mapsize_y):
+					#m[x].append(float(words[i+3+x+y*mapsize_x]))
 					m[x].append(float(words[i+3+x*mapsize_y+y]))
 
-	plt.imshow(m, extent=(0,800,0,800))
+	m = np.array(m)
+	m = np.rot90(m)
+	#m= np.transpose(m)
+	plt.imshow(m)
 	plt.show()
 	return m
 
