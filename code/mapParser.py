@@ -29,9 +29,10 @@ def parser():
 				for y in range(0,mapsize_y):
 					m[x].append(float(words[i+3+x*mapsize_y+y]))
 	m = np.array(m)
-	plt.imshow(m, extent=(0,800,0,800))
-	plt.show()
-	return m
+	m = np.rot90(m)
+	#plt.imshow(m, extent=(0,800,0,800))
+	#plt.show()
+	return m, global_mapsize_x, global_mapsize_y, resolution, autoshifted_x, autoshifted_y
 
 #def main():
 #	m = parser()
