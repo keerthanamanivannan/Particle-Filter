@@ -23,15 +23,15 @@ class particleFilter(object):
 		plt.imshow(self.occGrid)
 		plt.ion() 
 		self.scat = plt.quiver(0,0,1,0)
-		for i in range(self.OData.shape[0]-1):
-			#print "time " + str(i)
+		for i in range(self.LData.shape[0]-1):
+			print "time " + str(i)
 			XPrev = XCurrent
 			#IPython.embed()
 			uPrev = self.OData[i]
 			uCurrent = self.OData[i+1]
 			#print uCurrent
 
-			zCurrent = self.LData[0]#[i+1]
+			zCurrent = self.LData[i+1]
 			self.visualize(XCurrent, self.resolution)
 			XCurrent = self.particleFilterAlgo(XPrev, uCurrent, uPrev, zCurrent)
 
@@ -52,8 +52,8 @@ class particleFilter(object):
 
 	def visualize(self, X, res):
 		self.scat.remove()
-		y = np.floor(X[:,0] / res)
-		x = np.floor(X[:,1] / res)
+		y = np.floor(X[:,0]/res)
+		x = np.floor(X[:,1]/res)
 		u = np.cos(X[:,2])
 		v = np.sin(X[:,2])
 		self.scat = plt.quiver(x,y,u,v)
@@ -64,17 +64,17 @@ def main():
 	odomData, laserData = logParser.parser()
 	#IPython.embed()
 	mapData, global_mapsize_x, global_mapsize_y, resolution, autoshifted_x, autoshifted_y = mapParser.parser()
-	numParticles = 500
+	numParticles = 1000
 	particleSize = 3
 	XInitial = np.zeros([numParticles,particleSize])
 	for i in range(numParticles):
 		while (1):
-			XInitial[i] = np.array([3900, 3600, np.pi])
+			XInitial[i] = np.array([3900, 4000, 0])
 			#XInitial[i] = np.array([np.random.uniform(0, global_mapsize_x), np.random.uniform(0, global_mapsize_y), np.random.uniform(-1*np.pi, np.pi)])
 			occ = gridFunctions.occupancy(XInitial[i], resolution, mapData)
-			if occ>0:
+			if occ>0.8:
 				break
-	alpha = np.array([1,1,1,1])
+	alpha = np.array([0.001,0.001,1,1])
 	pf = particleFilter(laserData, odomData, mapData, resolution, numParticles, XInitial, alpha)
 
 if __name__ == "__main__": 

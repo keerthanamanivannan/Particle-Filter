@@ -18,14 +18,14 @@ def parser():
 			l = lines[i].split()
 			LData.append([float(l[x]) for x in range(1,len(l))])
 
-		if lines[i][0] == 'O':
-			l = lines[i].split()
-			OData.append([float(l[x]) for x in range(1,len(l))])	
+			if lines[i+1][0] == 'O':
+				l = lines[i+1].split()
+				OData.append([float(l[x]) for x in range(1,len(l))])	
 	OData = np.array(OData)
 	LData = np.array(LData)
 	#plt.plot(OData[:,0],OData[:,1])
 	#plt.show()
-	#print LData
+	#print OData
 	return OData, LData
 
 #def main():
