@@ -2,6 +2,7 @@
 import os.path
 import matplotlib.pyplot as plt
 import numpy as np
+import IPython
 
 def parser():
 	basePath = os.path.dirname(__file__)
@@ -30,9 +31,16 @@ def parser():
 					m[x].append(float(words[i+3+x*mapsize_y+y]))
 	m = np.array(m)
 	m = np.rot90(m)
-	#plt.imshow(m, extent=(0,800,0,800))
+	#IPython.embed()
+	z = np.zeros(m.shape)
+	z[m>0.8] = 1
+	z[m<0.8] = 0
+
+	m[m==-1] = 0
+	m[m==1] = 1
+	#plt.imshow(z, cmap = plt.cm.binary)
 	#plt.show()
-	return m, global_mapsize_x, global_mapsize_y, resolution, autoshifted_x, autoshifted_y
+	return m, z, global_mapsize_x, global_mapsize_y, resolution, autoshifted_x, autoshifted_y
 
 #def main():
 #	m = parser()

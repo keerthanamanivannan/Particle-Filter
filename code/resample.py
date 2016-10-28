@@ -15,7 +15,7 @@ def resampleParticles(X, weights):
 	for i in range(N):
 		sumWeights += weights[i]
 
-	normWeights = weights*1.0/sumWeights
+	normWeights = (weights*1.0)/sumWeights
 	r = np.random.uniform(0,1.0/N)
 	c = normWeights[0]
 	i = 0
