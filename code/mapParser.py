@@ -33,8 +33,8 @@ def parser():
 	m = np.rot90(m)
 	#IPython.embed()
 	z = np.zeros(m.shape)
-	z[m>0.8] = 1
-	z[m<0.8] = 0
+	z[m>0.8] = 0
+	z[m<0.8] = 1
 
 	m[m==-1] = 0
 	m[m==1] = 1

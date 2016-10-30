@@ -7,7 +7,7 @@ def occupancy(x, resolution, map):
 	xMap = int(math.floor(x[0]/resolution))
 	yMap = int(math.floor(x[1]/resolution))
 	#IPython.embed()
-	return map[xMap, yMap]
+	return 1-map[xMap, yMap]
 
 def checkLimits(x, resolution, mapSize):
 	xMap = math.floor(x[0]/resolution)
